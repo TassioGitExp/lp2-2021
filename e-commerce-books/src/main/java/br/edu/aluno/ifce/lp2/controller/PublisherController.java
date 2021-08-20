@@ -9,26 +9,26 @@ import java.util.Collection;
 @RestController
 @RequestMapping("publishers")
 public class PublisherController {
-    private static PublisherRepository reposirtory = new PublisherRepository();
+    private static PublisherRepository publisherRepository = new PublisherRepository();
 
     @PostMapping
     public void post(@RequestBody Publisher publisher) {
-        reposirtory.create(publisher);
+        publisherRepository.create(publisher);
     }
 
     @GetMapping
     public Collection<Publisher> get() {
-        return reposirtory.getAll();
+        return publisherRepository.getAll();
     }
 
     @PutMapping({"id"})
     public void put(@PathVariable Long id, @RequestBody Publisher publisher) {
         publisher.setId(id);
-        reposirtory.update(id, publisher);
+        publisherRepository.update(id, publisher);
     }
 
     @DeleteMapping({"id"})
     public void delete(@PathVariable Long id) {
-        reposirtory.delete(id);
+        publisherRepository.delete(id);
     }
 }
