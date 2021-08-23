@@ -3,7 +3,7 @@ package br.edu.aluno.ifce.lp2.model.repositories;
 import  br.edu.aluno.ifce.lp2.model.entities.Publisher;
 
 import java.util.Collection;
-import  java.util.HashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 public class PublisherRepository {
@@ -26,6 +26,10 @@ public class PublisherRepository {
 
     public Collection<Publisher> getAll() {
         return data.values();
+    }
+
+    public Publisher getById(Long id) {
+        return data.get(id);
     }
 
     public void delete(Long id) {

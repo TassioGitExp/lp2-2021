@@ -1,7 +1,7 @@
 package br.edu.aluno.ifce.lp2.controller;
 
+import br.edu.aluno.ifce.lp2.model.services.PublisherService;
 import br.edu.aluno.ifce.lp2.model.entities.Publisher;
-import br.edu.aluno.ifce.lp2.model.repositories.PublisherRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -9,26 +9,31 @@ import java.util.Collection;
 @RestController
 @RequestMapping("publishers")
 public class PublisherController {
-    private static PublisherRepository publisherRepository = new PublisherRepository();
+    private static PublisherService publisherService = new PublisherService();
 
     @PostMapping
     public void post(@RequestBody Publisher publisher) {
-        publisherRepository.create(publisher);
+        publisherService.create(publisher);
     }
 
     @GetMapping
     public Collection<Publisher> get() {
-        return publisherRepository.getAll();
+        return publisherService.getAll();
     }
 
-    @PutMapping({"id"})
+    @GetMapping("{id}")
+    public Publisher getById(@PathVariable Long id) {
+        return publisherService.getById(id);
+    }
+
+    @PutMapping("{id}")
     public void put(@PathVariable Long id, @RequestBody Publisher publisher) {
         publisher.setId(id);
-        publisherRepository.update(id, publisher);
+        publisherService.update(id, publisher);
     }
 
-    @DeleteMapping({"id"})
+    @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
-        publisherRepository.delete(id);
+        publisherService.delete(id);
     }
 }

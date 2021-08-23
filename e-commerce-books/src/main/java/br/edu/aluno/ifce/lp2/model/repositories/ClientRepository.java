@@ -7,7 +7,7 @@ import  java.util.HashMap;
 import java.util.Map;
 
 public class ClientRepository {
-    public static Long ids = 1L;
+    public static Long ids = 1l;
     public static Map<Long, Client> data;
 
     public ClientRepository() {

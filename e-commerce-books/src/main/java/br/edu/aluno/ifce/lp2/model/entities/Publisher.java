@@ -1,7 +1,7 @@
 package br.edu.aluno.ifce.lp2.model.entities;
 
 public class Publisher {
-    private long id;
+    private Long id;
     private String nome;
     private String telefone;
 
@@ -9,7 +9,7 @@ public class Publisher {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

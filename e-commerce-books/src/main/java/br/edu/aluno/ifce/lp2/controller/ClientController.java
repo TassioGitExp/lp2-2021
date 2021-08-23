@@ -21,13 +21,13 @@ public class ClientController {
         return clientRepository.getAll();
     }
 
-    @PutMapping({"id"})
+    @PutMapping("{id}")
     public void put(@PathVariable Long id, @RequestBody Client client) {
         client.setId(id);
         clientRepository.update(id, client);
     }
 
-    @DeleteMapping({"id"})
+    @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         clientRepository.delete(id);
     }
