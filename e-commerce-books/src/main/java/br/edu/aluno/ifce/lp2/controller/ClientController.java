@@ -1,7 +1,10 @@
 package br.edu.aluno.ifce.lp2.controller;
 
-import br.edu.aluno.ifce.lp2.model.entities.Client;
+import br.edu.aluno.ifce.lp2.model.entities.Publisher;
+import br.edu.aluno.ifce.lp2.model.services.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import br.edu.aluno.ifce.lp2.model.repositories.ClientRepository;
+import br.edu.aluno.ifce.lp2.model.entities.Client;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -9,26 +12,33 @@ import java.util.Collection;
 @RestController
 @RequestMapping("clients")
 public class ClientController {
-    private static ClientRepository clientRepository = new ClientRepository();
+
+    @Autowired
+    private ClientService clientService;
 
     @PostMapping
     public void post(@RequestBody Client client) {
-        clientRepository.create(client);
+        clientService.create(client);
     }
 
     @GetMapping
     public Collection<Client> get() {
-        return clientRepository.getAll();
+        return clientService.getAll();
+    }
+
+    @GetMapping("{id}")
+    public Client getById(@PathVariable String id) {
+        return clientService.getById(id);
     }
 
     @PutMapping("{id}")
-    public void put(@PathVariable Long id, @RequestBody Client client) {
+    public void put(@PathVariable String id, @RequestBody Client client) {
         client.setId(id);
-        clientRepository.update(id, client);
+        clientService.update(id, client);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        clientRepository.delete(id);
+    public void delete(@PathVariable String id) {
+        clientService.delete(id);
     }
 }

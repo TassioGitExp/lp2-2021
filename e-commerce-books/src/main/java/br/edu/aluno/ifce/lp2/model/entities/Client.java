@@ -1,26 +1,26 @@
 package br.edu.aluno.ifce.lp2.model.entities;
 
 public class Client {
-    private Long id;
-    private String nome;
+    private String id;
+    private String name;
     private String email;
     private String password;
     private boolean enabled;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

@@ -1,9 +1,9 @@
 package br.edu.aluno.ifce.lp2.model.repositories;
 
-import br.edu.aluno.ifce.lp2.model.entities.Publisher;
+import br.edu.aluno.ifce.lp2.model.entities.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface PublisherRepository extends MongoRepository<Publisher, String> {
+public interface UserRepository extends MongoRepository<User, String>{
 
     boolean existsByName(String name);
 

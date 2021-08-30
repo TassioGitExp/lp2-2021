@@ -1,9 +1,8 @@
 package br.edu.aluno.ifce.lp2.model.entities;
 
-public class Publisher {
+public class User {
     private String id;
     private String name;
-    private String telephone;
 
     public String getId() {
         return id;
@@ -19,13 +18,5 @@ public class Publisher {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getTelefone() {
-        return telephone;
-    }
-
-    public void setTelefone(String telephone) {
-        this.telephone = telephone;
     }
 }

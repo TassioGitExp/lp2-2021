@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://lp2Tassio:U6o9hyX6C2eNJgqs@aulalp2.ft9s2.mongodb.net/test
+
