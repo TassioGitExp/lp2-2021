@@ -1,11 +1,14 @@
 package br.edu.aluno.ifce.lp2.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import br.edu.aluno.ifce.lp2.controller.request.PublisherRequest;
+import br.edu.aluno.ifce.lp2.controller.response.PublisherResponse;
 import br.edu.aluno.ifce.lp2.model.services.PublisherService;
 import br.edu.aluno.ifce.lp2.model.entities.Publisher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 
 @RestController
 @RequestMapping("publishers")
@@ -15,13 +18,22 @@ public class PublisherController {
     private PublisherService publisherService;
 
     @PostMapping
-    public void post(@RequestBody Publisher publisher) {
-        publisherService.create(publisher);
+    public PublisherResponse post(@RequestBody PublisherRequest request) {
+        var publisher = request.toPublisher();
+        return new PublisherResponse().fromPublisher(publisherService.create(publisher));
     }
 
     @GetMapping
-    public Collection<Publisher> get() {
-        return publisherService.getAll();
+    public Page<PublisherResponse> get(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int linesPerPage,
+        @RequestParam(defaultValue = "ASC") String direction,
+        @RequestParam(defaultValue = "name") String orderBy
+    ) {
+        var pageable = PageRequest
+                .of(page, linesPerPage, Sort.Direction.fromString(direction), orderBy);
+        return publisherService.getAll(pageable)
+                .map(p -> new PublisherResponse().fromPublisher(p));
     }
 
     @GetMapping("{id}")
@@ -30,9 +42,10 @@ public class PublisherController {
     }
 
     @PutMapping("{id}")
-    public void put(@PathVariable String id, @RequestBody Publisher publisher) {
-        publisher.setId(id);
-        publisherService.update(id, publisher);
+    public PublisherResponse put(@PathVariable String id, @RequestBody PublisherRequest request) {
+        var publisher = request.toPublisher();
+
+        return new PublisherResponse().fromPublisher(publisherService.update(id, publisher));
     }
 
     @DeleteMapping("{id}")
