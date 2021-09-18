@@ -7,8 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-
 @Service
 public class PublisherService {
 
@@ -17,7 +15,7 @@ public class PublisherService {
 
     public Publisher create(Publisher publisher) {
         if(publisherRepository.existsByName(publisher.getName())) {
-            throw new RuntimeException("Nome já existe!");
+            throw new RuntimeException("Publisher já existe!");
         }
 
         return publisherRepository.save(publisher);
@@ -28,9 +26,13 @@ public class PublisherService {
 
         var p = publisherRepository.findByName(publisher.getName());
 
-        if(p != null &&p.getId().equals(id)){
+        if(p != null && !p.getId().equals(id)){
             throw new RuntimeException("Nome já existe!");
         }
+
+        // se nome for nulo, modificar apenas telefone
+        // se telefone for nulo, modificar apenas nome
+        // se telefone e nome forem nulos, runtime exeption
 
         publisherDatabase.setName(publisher.getName());
         publisherDatabase.setTelephone(publisher.getTelephone());

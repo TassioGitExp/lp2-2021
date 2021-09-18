@@ -1,13 +1,14 @@
 package br.edu.aluno.ifce.lp2.controller;
 
-import br.edu.aluno.ifce.lp2.model.entities.Publisher;
+import br.edu.aluno.ifce.lp2.controller.request.ClientRequest;
+import br.edu.aluno.ifce.lp2.controller.response.ClientResponse;
 import br.edu.aluno.ifce.lp2.model.services.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
-import br.edu.aluno.ifce.lp2.model.repositories.ClientRepository;
 import br.edu.aluno.ifce.lp2.model.entities.Client;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 
 @RestController
 @RequestMapping("clients")
@@ -17,13 +18,23 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping
-    public void post(@RequestBody Client client) {
-        clientService.create(client);
+    public ClientResponse post(@RequestBody ClientRequest clientRequest) {
+        var client = clientRequest.toClient();
+
+        return new ClientResponse().fromClient(clientService.create(client));
     }
 
     @GetMapping
-    public Collection<Client> get() {
-        return clientService.getAll();
+    public Page<ClientResponse> get(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "6") int linesPerPage,
+            @RequestParam(defaultValue = "ASC") String direction,
+            @RequestParam(defaultValue = "name") String orderBy
+    ) {
+        var pageable = PageRequest
+                .of(page, linesPerPage, Sort.Direction.fromString(direction), orderBy);
+        return clientService.getAll(pageable)
+                .map(c -> new ClientResponse().fromClient(c));
     }
 
     @GetMapping("{id}")
@@ -32,9 +43,10 @@ public class ClientController {
     }
 
     @PutMapping("{id}")
-    public void put(@PathVariable String id, @RequestBody Client client) {
-        client.setId(id);
-        clientService.update(id, client);
+    public ClientResponse put(@PathVariable String id, @RequestBody ClientRequest clientRequest) {
+        var client = clientRequest.toClient();
+
+        return new ClientResponse().fromClient(clientService.update(id, client));
     }
 
     @DeleteMapping("{id}")

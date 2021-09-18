@@ -26,7 +26,7 @@ public class PublisherController {
     @GetMapping
     public Page<PublisherResponse> get(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "5") int linesPerPage,
+        @RequestParam(defaultValue = "6") int linesPerPage,
         @RequestParam(defaultValue = "ASC") String direction,
         @RequestParam(defaultValue = "name") String orderBy
     ) {

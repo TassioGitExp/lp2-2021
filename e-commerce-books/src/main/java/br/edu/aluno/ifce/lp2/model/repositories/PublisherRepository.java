@@ -9,4 +9,5 @@ public interface PublisherRepository extends MongoRepository<Publisher, String> 
 
     Publisher findByName(String name);
 
+
 }
