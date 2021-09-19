@@ -13,7 +13,7 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public Client create(Client client) { //Mudar para email!
+    public Client create(Client client) {
         if(clientRepository.existsByEmail(client.getEmail())) {
             throw new RuntimeException("Cliente já existe!");
         }
@@ -39,9 +39,7 @@ public class ClientService {
         //Se o objeto existe e tem o id diferente do inserido, throw exeption.
         //(Está tentando usar o email de um objeto já existente no banco de dados.)
         if(c != null && !c.getId().equals(id)) {
-            throw new RuntimeException("Email já existe"); // Arrumar isso aqui.
-                                                          // Preciso entender melhor.
-                                                         // Acho que entendi.
+            throw new RuntimeException("Email já existe");
         }
 
         //Substitui os dados do client antigo.
