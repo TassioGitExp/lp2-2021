@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -12,5 +13,13 @@
         <module name="repository.mongodb" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api" options="-parameters" />
+      <module name="core" options="-parameters" />
+      <module name="email" options="-parameters" />
+      <module name="repository.mongodb" options="-parameters" />
+    </option>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package repository.mongodb.repository;
+package com.justpickit.repository;
 import com.justpickit.core.domain.User;
 import com.justpickit.core.ports.driven_R.repository.UserRepositoryPort;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -1,4 +1,4 @@
-package repository.mongodb.repository.config;
+package com.justpickit.repository.config;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;

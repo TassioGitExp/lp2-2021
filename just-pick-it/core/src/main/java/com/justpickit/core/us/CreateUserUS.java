@@ -4,8 +4,10 @@ import com.justpickit.core.domain.User;
 import com.justpickit.core.ports.driven_R.email.SendEmailForTokenConfirmationPort;
 import com.justpickit.core.ports.driven_R.repository.UserRepositoryPort;
 import com.justpickit.core.ports.driver_L.CreateUserPort;
+import org.springframework.stereotype.Service;
 
-public record CreateUserUS(SendEmailForTokenConfirmationPort sendEmailForTokenConfirmationPort,
+@Service
+public record CreateUserUS(/*SendEmailForTokenConfirmationPort sendEmailForTokenConfirmationPort,*/
                            UserRepositoryPort userRepositoryPort) implements CreateUserPort {
 
     @Override
