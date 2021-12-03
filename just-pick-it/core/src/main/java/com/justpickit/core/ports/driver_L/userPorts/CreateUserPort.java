@@ -1,4 +1,4 @@
-package com.justpickit.core.ports.driver_L;
+package com.justpickit.core.ports.driver_L.userPorts;
 
 import com.justpickit.core.domain.User;
 
