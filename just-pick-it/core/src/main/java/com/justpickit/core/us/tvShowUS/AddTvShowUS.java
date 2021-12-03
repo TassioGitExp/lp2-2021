@@ -15,6 +15,8 @@ public record AddTvShowUS(TvShowRepositoryPort tvShowRepositoryPort) implements 
         if(tvShowRepositoryPort.existsByName(tvShow.getName()))
             throw new IllegalStateException("This name is already being used!");
 
+        tvShowRepositoryPort.save(tvShow);
+
         return tvShow;
     }
 }
