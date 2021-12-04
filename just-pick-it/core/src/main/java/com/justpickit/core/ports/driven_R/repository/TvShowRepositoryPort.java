@@ -1,6 +1,8 @@
 package com.justpickit.core.ports.driven_R.repository;
 import com.justpickit.core.domain.TvShow;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 public interface TvShowRepositoryPort {
@@ -15,7 +17,9 @@ public interface TvShowRepositoryPort {
 
     public Optional<TvShow> findById (String id);
 
-    public Optional<TvShow> findByGenre (String genre);
+    public Collection<TvShow> findByGenre (String genre);
+
+    public Collection<TvShow> findAll ();
 
     void deleteById (String id);
 
