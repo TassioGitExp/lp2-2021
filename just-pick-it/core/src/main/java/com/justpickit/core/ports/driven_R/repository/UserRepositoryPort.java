@@ -6,19 +6,15 @@ import java.util.Optional;
 
 public interface UserRepositoryPort {
 
-    public User save (User user);
+    User save (User user);
 
-    public boolean existsByEmail (String email);
+    boolean existsByEmail (String email);
 
-    public boolean existsByUsername (String username);
+    boolean existsByUsername (String username);
 
-    public boolean existsById (String id);
+    Optional<User> findById (String id);
 
-    public Optional<User> findById (String id);
-
-    public Optional<User> findByUsername (String username);
-
-    public Optional<User> findByEmail (String email);
+    User findByTokenValue(String token);
 
     void deleteById (String id);
 

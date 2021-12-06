@@ -10,7 +10,8 @@ public record SendEmailForTokenConfirmation(SmtpSendEmail smtpSendEmail) impleme
 
     @Override
     public void apply(String email, String token) {
-       smtpSendEmail.apply(Set.of(email), "Just Pick It account confirmation", token);
+       smtpSendEmail.apply(Set.of(email), "Just Pick It account confirmation",
+               "Your code is \t" + token + "\t it will expire in 30 minutes.");
     }
 
 }

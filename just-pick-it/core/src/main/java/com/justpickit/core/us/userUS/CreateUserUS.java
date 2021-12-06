@@ -1,5 +1,6 @@
 package com.justpickit.core.us.userUS;
 
+import com.justpickit.core.domain.Token;
 import com.justpickit.core.domain.User;
 import com.justpickit.core.ports.driven_R.email.SendEmailForTokenConfirmationPort;
 import com.justpickit.core.ports.driven_R.repository.UserRepositoryPort;
@@ -15,17 +16,19 @@ public record CreateUserUS(SendEmailForTokenConfirmationPort sendEmailForTokenCo
 
         //Verifica se email existe;
         if (userRepositoryPort.existsByEmail(user.getEmail()))
-            throw new IllegalStateException("invalid email!");
+            throw new IllegalStateException("Email not available!");
         //Verificar se username existe;
         if (userRepositoryPort.existsByUsername(user.getUsername()))
             throw new IllegalStateException("Invalid username!");
-        //Gerar token;
 
-        //Enviar email de confirmação;
-        sendEmailForTokenConfirmationPort.apply(user.getEmail(), "12345");
+        //Gerar token;
+        user.setToken(new Token(8));
 
         //Salvar no banco de daddos;
         user = userRepositoryPort.save(user);
+
+        //Enviar email de confirmação;
+        sendEmailForTokenConfirmationPort.apply(user.getEmail(),user.getToken().getValue());
 
         return user;
     }

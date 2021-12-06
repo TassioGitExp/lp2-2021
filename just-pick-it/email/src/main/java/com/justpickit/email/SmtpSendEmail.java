@@ -23,7 +23,7 @@ public record SmtpSendEmail(JavaMailSender javaMailSender) {
             javaMailSender.send(message);
 
         } catch (MailException e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Email not found!");
         }
     }
 }

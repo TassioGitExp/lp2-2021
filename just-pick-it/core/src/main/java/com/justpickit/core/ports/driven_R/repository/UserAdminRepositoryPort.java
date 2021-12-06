@@ -5,19 +5,13 @@ import java.util.Optional;
 
 public interface UserAdminRepositoryPort {
 
-    public UserAdmin save (UserAdmin userAdmin);
+    UserAdmin save (UserAdmin userAdmin);
 
-    public boolean existsByEmail (String email);
+    boolean existsByEmail (String email);
 
-    public boolean existsByUsername (String username);
+    boolean existsByUsername (String username);
 
-    public boolean existsById (String id);
-
-    public Optional<UserAdmin> findById (String id);
-
-    public Optional<UserAdmin> findByUsername (String username);
-
-    public Optional<UserAdmin> findByEmail (String email);
+    Optional<UserAdmin> findById (String id);
 
     void deleteById (String id);
 
