@@ -1,5 +1,7 @@
 package com.justpickit.core.ports.driven_R.repository;
 import com.justpickit.core.domain.Movie;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +21,7 @@ public interface MovieRepositoryPort {
 
     Collection<Movie> findByGenre(String genre);
 
-    Collection<Movie> findAll();
+    Page<Movie> findAll(Pageable pageable);
 
     void deleteById (String id);
 

@@ -3,6 +3,9 @@ package com.justpickit.controller;
 import com.justpickit.controller.request.TvShowRequest;
 import com.justpickit.controller.response.TvShowResponse;
 import com.justpickit.core.ports.driver_L.tvShowPorts.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -34,18 +37,25 @@ public record TvShowController(
         return new TvShowResponse().fromTvshow(tvShow);
     }
 
-    @GetMapping("name/{name}")
-    public TvShowResponse getName(@PathVariable String name) {
+    @GetMapping("search")
+    public TvShowResponse getName(@RequestParam String name) {
         var tvShow = findTvShowByNamePort.apply(name);
 
         return new TvShowResponse().fromTvshow(tvShow);
     }
 
     @GetMapping("list/all")
-    public Collection<TvShowResponse> getAll () {
-        return findAllTvShowsPort.apply().stream()
-                .map(p -> new TvShowResponse().fromTvshow(p))
-                .collect(Collectors.toList());
+    public Page<TvShowResponse> getAll (
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "12") int itemsPerPage,
+            @RequestParam(defaultValue = "ASC") String direction,
+            @RequestParam(defaultValue = "name") String orderBy
+    ){
+        var pageable = PageRequest
+                .of(page, itemsPerPage, Sort.Direction.fromString(direction), orderBy);
+
+        return findAllTvShowsPort.apply(pageable)
+                .map(p -> new TvShowResponse().fromTvshow(p));
     }
 
     @GetMapping("recommendation/{genre}")

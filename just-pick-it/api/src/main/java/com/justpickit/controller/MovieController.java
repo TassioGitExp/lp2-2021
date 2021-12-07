@@ -3,6 +3,10 @@ package com.justpickit.controller;
 import com.justpickit.controller.request.MovieRequest;
 import com.justpickit.controller.response.MovieResponse;
 import com.justpickit.core.ports.driver_L.moviePorts.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -34,8 +38,8 @@ public record MovieController(
         return new MovieResponse().fromMovie(movie);
     }
 
-    @GetMapping("name/{name}")
-    public MovieResponse getName (@PathVariable String name) {
+    @GetMapping("search")
+    public MovieResponse getName (@RequestParam String name) {
         var movie = findMovieByNamePort.apply(name);
 
         return new MovieResponse().fromMovie(movie);
@@ -51,10 +55,17 @@ public record MovieController(
 
     //Teste get all - OK
     @GetMapping("list/all")
-    public Collection<MovieResponse> getAll (){
-      return findAllMoviesPort.apply().stream()
-              .map(p -> new MovieResponse().fromMovie(p))
-              .collect(Collectors.toList());
+    public Page<MovieResponse> getAll (
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "12") int itemsPerPage,
+            @RequestParam(defaultValue = "ASC") String direction,
+            @RequestParam(defaultValue = "name") String orderBy
+    ){
+        var pageable = PageRequest
+                .of(page, itemsPerPage, Sort.Direction.fromString(direction), orderBy);
+
+      return findAllMoviesPort.apply(pageable)
+              .map(p -> new MovieResponse().fromMovie(p));
     }
 
     //Teste get random by genre -OK

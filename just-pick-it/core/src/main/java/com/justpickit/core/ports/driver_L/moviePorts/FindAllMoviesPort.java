@@ -1,12 +1,13 @@
 package com.justpickit.core.ports.driver_L.moviePorts;
 
 import com.justpickit.core.domain.Movie;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface FindAllMoviesPort {
 
-    Collection<Movie> apply ();
+    Page<Movie> apply (Pageable pageable);
 
 }
