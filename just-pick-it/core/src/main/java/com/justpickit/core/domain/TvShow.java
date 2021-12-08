@@ -14,7 +14,7 @@ public class TvShow {
     private int numberOfEpisodes;
     private int numberOfSeasons;
     private String durationPerEpisode;
-    private String director;
+    private String creator;
     private String synopsis;
 
 }
