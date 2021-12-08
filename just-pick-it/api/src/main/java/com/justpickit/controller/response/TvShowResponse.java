@@ -13,6 +13,7 @@ public class TvShowResponse {
     private int numberOfEpisodes;
     private int numberOfSeasons;
     private String durationPerEpisode;
+    private String director;
     private String synopsis;
 
     public TvShowResponse fromTvshow(TvShow tvShow) {
@@ -24,6 +25,7 @@ public class TvShowResponse {
         this.numberOfEpisodes = tvShow.getNumberOfEpisodes();
         this.numberOfSeasons = tvShow.getNumberOfSeasons();
         this.durationPerEpisode = tvShow.getDurationPerEpisode();
+        this.director = tvShow.getDirector();
         this.synopsis = tvShow.getSynopsis();
 
         return  this;

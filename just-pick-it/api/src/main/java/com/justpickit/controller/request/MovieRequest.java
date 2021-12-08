@@ -10,6 +10,7 @@ public class MovieRequest {
     private String genre;
     private String releaseDate;
     private String duration;
+    private String director;
     private String synopsis;
 
     public Movie toMovie() {
@@ -19,6 +20,7 @@ public class MovieRequest {
         movie.setGenre(genre);
         movie.setReleaseDate(releaseDate);
         movie.setDuration(duration);
+        movie.setDirector(director);
         movie.setSynopsis(synopsis);
 
         return movie;

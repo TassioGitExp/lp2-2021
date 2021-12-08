@@ -71,15 +71,20 @@ public record MovieController(
     //Teste get random by genre -OK
     @GetMapping("recommendation/{genre}")
     public MovieResponse getByGenre (@PathVariable String genre) {
+        //Cria a collection com os filmes do genre escolhido;
         var collection = findMoviesByGenrePort.apply(genre).stream()
                 .map(p -> new MovieResponse().fromMovie(p))
                 .collect(Collectors.toList());
 
         var rand = new Random();
 
+        //Retorna um elemento aleatorio da collection;
         return collection.get(rand.nextInt(collection.size()));
     }
 
+    //Add to watchlist
+    //Achar um metodo para armazenar o item aleatorio gerado na em getByGenre
+    //Se não conseguir, fazer simples mesmo (add by id).
 
     @DeleteMapping("delete/{id}")
     public void delete (@PathVariable String id) {

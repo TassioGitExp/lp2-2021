@@ -12,6 +12,7 @@ public class TvShowRequest {
     private int numberOfEpisodes;
     private int numberOfSeasons;
     private String durationPerEpisode;
+    private String director;
     private String synopsis;
 
     public TvShow toTvShow() {
@@ -23,6 +24,7 @@ public class TvShowRequest {
         tvShow.setNumberOfEpisodes(numberOfEpisodes);
         tvShow.setNumberOfSeasons(numberOfSeasons);
         tvShow.setDurationPerEpisode(durationPerEpisode);
+        tvShow.setDirector(director);
         tvShow.setSynopsis(synopsis);
 
         return tvShow;

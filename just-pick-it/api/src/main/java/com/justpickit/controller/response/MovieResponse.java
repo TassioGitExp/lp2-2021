@@ -11,6 +11,7 @@ public class MovieResponse {
     private String genre;
     private String releaseDate;
     private String duration;
+    private String director;
     private String synopsis;
 
     public MovieResponse fromMovie(Movie movie) {
@@ -20,6 +21,7 @@ public class MovieResponse {
         this.genre = movie.getGenre();
         this.releaseDate = movie.getReleaseDate();
         this.duration = movie.getDuration();
+        this.director = movie.getDirector();
         this.synopsis = movie.getSynopsis();
 
         return this;
