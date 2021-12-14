@@ -2,10 +2,7 @@ package com.justpickit.controller;
 
 import com.justpickit.controller.request.UserRequest;
 import com.justpickit.controller.response.UserResponse;
-import com.justpickit.core.ports.driver_L.userPorts.CreateUserPort;
-import com.justpickit.core.ports.driver_L.userPorts.DeleteUserByIdPort;
-import com.justpickit.core.ports.driver_L.userPorts.EnableUserByTokenPort;
-import com.justpickit.core.ports.driver_L.userPorts.FindUserByIdPort;
+import com.justpickit.core.ports.driver_L.userPorts.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public record UserController(
         CreateUserPort createUserPort,
         FindUserByIdPort findUserByIdPort,
+        FindUserByUsernamePort findUserByUsernamePort,
         EnableUserByTokenPort enableUserByTokenPort,
         DeleteUserByIdPort deleteUserByIdPort
 ) {

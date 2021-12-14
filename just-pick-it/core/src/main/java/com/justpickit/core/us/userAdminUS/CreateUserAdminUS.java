@@ -14,11 +14,9 @@ public record CreateUserAdminUS(SendEmailForTokenConfirmationPort sendEmailForTo
     @Override
     public UserAdmin apply(UserAdmin userAdmin) {
 
-        //Nome precisa ser unico
         if (userAdminRepositoryPort.existsByUsername(userAdmin.getUsername()))
             throw new IllegalStateException("Invalid username");
 
-        //Email precisa ser unico
         if (userAdminRepositoryPort.existsByEmail(userAdmin.getEmail()))
             throw new IllegalStateException("Invalid username");
 

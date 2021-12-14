@@ -6,9 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-//Senhas: O6cLsEMyVxRwM3kU
-//Link: mongodb+srv://lp2Tassio:<password>@aulalp2.ft9s2.mongodb.net/test
-
 @Configuration
 public class ConfigMongoDev {
 

@@ -6,6 +6,6 @@ import java.util.Collection;
 
 public interface FindMoviesByGenrePort {
 
-    public Collection<Movie> apply (String genre);
+    Collection<Movie> apply (String genre);
 
 }

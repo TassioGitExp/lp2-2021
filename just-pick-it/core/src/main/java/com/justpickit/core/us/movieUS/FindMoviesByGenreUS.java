@@ -6,7 +6,6 @@ import com.justpickit.core.ports.driver_L.moviePorts.FindMoviesByGenrePort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Collections;
 
 @Service
 public record FindMoviesByGenreUS(MovieRepositoryPort movieRepositoryPort) implements FindMoviesByGenrePort {

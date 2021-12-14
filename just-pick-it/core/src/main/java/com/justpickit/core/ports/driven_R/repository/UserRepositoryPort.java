@@ -1,7 +1,5 @@
 package com.justpickit.core.ports.driven_R.repository;
 import com.justpickit.core.domain.User;
-import org.springframework.context.annotation.Bean;
-
 import java.util.Optional;
 
 public interface UserRepositoryPort {
@@ -13,6 +11,8 @@ public interface UserRepositoryPort {
     boolean existsByUsername (String username);
 
     Optional<User> findById (String id);
+
+    Optional<User> findByUsername (String username);
 
     User findByTokenValue(String token);
 

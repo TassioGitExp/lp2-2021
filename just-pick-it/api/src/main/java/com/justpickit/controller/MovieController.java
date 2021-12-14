@@ -5,11 +5,8 @@ import com.justpickit.controller.response.MovieResponse;
 import com.justpickit.core.ports.driver_L.moviePorts.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -45,15 +42,6 @@ public record MovieController(
         return new MovieResponse().fromMovie(movie);
     }
 
-    //Acho que parte de gerar um filme aleatorio
-    //seria aqui, com o get mapping("{gender}/{filme}")
-    //mais ou menos isso, retornando um elemento aleatório
-    //de uma lista. Acho que assim é possivel.
-
-    //1 - findByGenre retorna uma Lista com todos elementos com o genero escolhido
-    //2 - achar um elemento aleatorio nessa lista
-
-    //Teste get all - OK
     @GetMapping("list/all")
     public Page<MovieResponse> getAll (
             @RequestParam(defaultValue = "0") int page,
@@ -68,23 +56,17 @@ public record MovieController(
               .map(p -> new MovieResponse().fromMovie(p));
     }
 
-    //Teste get random by genre -OK
     @GetMapping("recommendation/{genre}")
     public MovieResponse getByGenre (@PathVariable String genre) {
-        //Cria a collection com os filmes do genre escolhido;
+
         var collection = findMoviesByGenrePort.apply(genre).stream()
                 .map(p -> new MovieResponse().fromMovie(p))
                 .collect(Collectors.toList());
 
         var rand = new Random();
 
-        //Retorna um elemento aleatorio da collection;
         return collection.get(rand.nextInt(collection.size()));
     }
-
-    //Add to watchlist
-    //Achar um metodo para armazenar o item aleatorio gerado na em getByGenre
-    //Se não conseguir, fazer simples mesmo (add by id).
 
     @DeleteMapping("delete/{id}")
     public void delete (@PathVariable String id) {

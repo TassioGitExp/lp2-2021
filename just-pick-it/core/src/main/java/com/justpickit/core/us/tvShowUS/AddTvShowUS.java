@@ -11,7 +11,6 @@ public record AddTvShowUS(TvShowRepositoryPort tvShowRepositoryPort) implements 
     @Override
     public TvShow apply (TvShow tvShow) {
 
-        //Nome precisa ser unico
         if(tvShowRepositoryPort.existsByName(tvShow.getName()))
             throw new IllegalStateException("This name is already being used!");
 

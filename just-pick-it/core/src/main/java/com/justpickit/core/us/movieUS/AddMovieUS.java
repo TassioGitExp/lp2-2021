@@ -11,7 +11,6 @@ public record AddMovieUS(MovieRepositoryPort movieRepositoryPort) implements Add
     @Override
     public Movie apply (Movie movie) {
 
-        //Nome precisa ser unico
         if(movieRepositoryPort.existsByName(movie.getName()))
             throw new IllegalStateException("This name is already being used!");
 
